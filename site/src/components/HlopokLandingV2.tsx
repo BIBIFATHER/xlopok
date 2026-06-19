@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -206,10 +205,7 @@ export default function HlopokLandingV2() {
     <main className="min-h-screen bg-[#fbfaf6] text-[#4d4b3a]">
       <audio ref={audioRef} preload="auto" src="/media/canvas-tension-hit.m4a" />
 
-      <header className="mx-auto flex max-w-[1720px] items-center justify-between px-8 py-7 md:px-14">
-        <Link className="grid h-10 w-10 place-items-center border border-[#4d4b3a]/25 text-[#4d4b3a]" href="/">
-          <span className="font-serif text-2xl leading-none">Х</span>
-        </Link>
+      <header className="mx-auto flex max-w-[1720px] items-center justify-end gap-8 px-8 py-7 md:justify-between md:px-14">
         <nav className="hidden items-center gap-20 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#4d4b3a]/70 md:flex">
           {navItems.map((item) => (
             <a className="transition hover:text-[#4d4b3a]" href={item.href} key={item.href}>
