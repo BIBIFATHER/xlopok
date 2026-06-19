@@ -1,0 +1,70 @@
+# Хлопок / Changelog
+
+## 2026-06-19
+
+- Начата отдельная версия сайта `v2` без замены production-страницы `/`.
+- Добавлен route `/v2` с компонентом `HlopokLandingV2`.
+- Для `v2` нарезаны ассеты из утвержденного концепта `Generated image 1.png`: hero, производство, конструкция, звук, карточка каталога.
+- Проверено: `npm run lint` проходит, `npm run build` проходит, Next routes включают `/` и `/v2`.
+- Production deploy Vercel с отдельным `/v2` завершен: `https://site-kappa-lemon-77.vercel.app/v2`.
+- Deployment URL: `https://site-2n8w8zykv-blizkos-projects.vercel.app`.
+- По референсу Dribbble `Heights` пересобрана визуальная система лендинга: editorial hero, крупный serif-wordmark, секционная нумерация, off-white/sage/peach/olive палитра.
+- Header возвращен к минимальному бренду `Хлопок`, центрированной навигации и темной olive CTA.
+- Hero дополнен реальным фото поверхности холста в calm product-frame вместо пустого типографического экрана.
+- Добавлена editorial-секция `Грунт` с фото рулонной линии грунтовки и якорем в header.
+- Все секции приведены к единой референсной сетке: 01-07, тонкие линии, малые радиусы, меньше карточности.
+- Production build проходит после редизайна.
+- Production deploy Vercel завершен: `https://site-kappa-lemon-77.vercel.app`.
+- Deployment URL: `https://site-kbqiv1qmu-blizkos-projects.vercel.app`.
+- Создан Next.js проект в `/site`.
+- Подключены Tailwind CSS, TypeScript и Motion.
+- Добавлены реальные фото производства и поверхности холста.
+- Подготовлена web-версия видео проверки натяжения.
+- Вырезан и нормализован отдельный звук удара по холсту.
+- Собран первый лендинг `Хлопок`.
+- Реализован интерактив `Проверить натяжение`.
+- Добавлен концепт `Паспорт холста` с mockup-биркой.
+- Добавлен ассортимент без цен: материалы, плотности, профили, диапазоны размеров.
+- Добавлен блок заказных позиций.
+- Добавлена форма заявки с Telegram как главным каналом.
+- Production build проходит.
+- Проект подключен к Vercel: `blizkos-projects/site`.
+- Деплой Vercel: `https://site-kappa-lemon-77.vercel.app`.
+- Сделан второй визуальный проход: более тонкая типографика, спокойный акцент, меньшие радиусы и мягче карточки.
+- Preview refined version: `https://site-5x0b3ne99-blizkos-projects.vercel.app`.
+- Добавлен временный SVG-логотип `Хлопок` в header и паспорт холста.
+- Preview with logo: `https://site-n2nko8ydl-blizkos-projects.vercel.app`.
+- Версия с уточненным визуальным стилем и логотипом выкачена в production: `https://site-kappa-lemon-77.vercel.app`.
+- По референсу Belgium Animated пересобран hero в layered art-direction scene: крупная обрезанная типографика, центральный холст, карточка звука и карточка паспорта.
+- Preview layered hero: `https://site-cslhvqgie-blizkos-projects.vercel.app`.
+- Исправлена нечитаемая layered-версия: убраны хаотичные наложения, красный гигантский слой заменен на низкоконтрастный wordmark, hero выстроен по читаемой сетке.
+- Preview readable art direction: `https://site-r4r1sh3kq-blizkos-projects.vercel.app`.
+- Проведен layout-аудит на 390, 430, 768 и 1440 px; исправлен мобильный overflow в блоке `sound`.
+- Preview after spacing/overflow audit: `https://site-23l8it1jw-blizkos-projects.vercel.app`.
+- Убран декоративный логотип/крупный wordmark из hero; первый экран очищен до текста, CTA и фото поверхности холста.
+- Скрыт раздел `Паспорт холста` с mockup отрывной бирки; концепт сохранен в DNA для следующего этапа.
+- Preview without tag mockup: `https://site-iy77gm2u8-blizkos-projects.vercel.app`.
+- Возвращен крупный фоновый wordmark `Хлопок` в hero; маленький бренд `Хлопок` удален из левого верхнего угла шапки.
+- Убран служебный hero-текст `Производство холстов / Россия и СНГ`.
+- Preview: `https://site-5hr9nb87v-blizkos-projects.vercel.app`.
+- Удалена opening-тема `Холст должен звучать`: первый экран теперь открывается брендом `Хлопок` и описанием производства.
+- Порядок секций изменен: `Производство` -> `Конструкция` -> `Послушать` -> `Ассортимент`.
+- Preview: `https://site-qxo5ghb9j-blizkos-projects.vercel.app`.
+- Из hero удалена фраза `Показываем материал, подрамник, поверхность и процесс без лишних обещаний`.
+- Фоновый wordmark `Хлопок` возвращен в серый тон.
+- Preview: `https://site-1p1by1fh7-blizkos-projects.vercel.app`.
+- Фото удалено из hero; первый экран стал типографической сценой с текстовым логотипом `Хлопок`.
+- Добавлена анимация появления букв логотипа снизу, ближе к референсу.
+- Preview: `https://site-3737yvnvg-blizkos-projects.vercel.app`.
+- Удален черный foreground-логотип `Хлопок`; оставлен только серый анимированный wordmark.
+- Цветовая гамма приведена к палитре Dribbble-референса: `#E4E6E9`, `#BCC4CC`, `#858183`, `#6D6965`, `#D86A17`, `#4C2F23`.
+- Preview: `https://site-c74y3si8b-blizkos-projects.vercel.app`.
+- Красный акцент заменен на более оранжевый `#D86A17` для CTA, меток, waveform и focus-состояний.
+- Preview: `https://site-p9dulqmp1-blizkos-projects.vercel.app`.
+- Удален блок `Звуковой отпечаток` вместе с пояснением про запуск аудио; в секции `Послушать` осталось видео и кнопка.
+- Восстановлен исходник `src/components/HlopokLanding.tsx`, чтобы Vercel Linux-сборка не зависела от локального dev-cache.
+- Preview: `https://site-ayn0to6mc-blizkos-projects.vercel.app`.
+- Добавлен раздел `Грунт`: текст про рулонную линию грунтовки, стабильную поверхность и новое фото `canvas-priming-line.jpeg`.
+- Новый порядок/нумерация секций: `Процесс` -> `Грунт` -> `Основа` -> `Звук` -> `Размеры` -> `Контакт`.
+- Для якорных секций добавлен `scroll-mt-28`, чтобы fixed-шапка не перекрывала заголовки при переходе из навигации.
+- Preview: `https://site-bsai9871k-blizkos-projects.vercel.app`.
