@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 const telegramUrl = "https://t.me/anosov.anton";
@@ -37,21 +37,25 @@ const steps = [
 ];
 
 // Реальный ассортимент из PDF (BLI-130). Цены и условия сотрудничества не публикуем.
+// gallery — временные фото-ракурсы, заменить на реальные снимки каждого типа.
 const catalogCards = [
   {
     title: "Подрамник / мелкое и среднее зерно",
     meta: ["100% хлопок", "Плотность: 280 / 300 г/м2", "Грунт: акриловый", "Профиль: 16x23 / 18x28 / 20x42 мм"],
     range: "15x15 — 100x150 см",
+    gallery: ["/media/v2/hero-canvas.jpg", "/media/canvas-front-surface.jpg", "/media/v2/construction-corner.jpg"],
   },
   {
     title: "Подрамник / крупное зерно",
     meta: ["100% хлопок, двунитка", "Плотность: 430 г/м2", "Грунт: акриловый", "Профиль: 18x28 / 20x42 мм"],
     range: "18x24 — 100x150 см",
+    gallery: ["/media/canvas-back-frame.jpg", "/media/canvas-stretch-process.jpg", "/media/v2/construction-corner.jpg"],
   },
   {
     title: "Холст на картоне",
     meta: ["100% хлопок, мелкое зерно", "Плотность: 280 г/м2", "Грунт: акриловый", "Картон: 2.5 / 3 мм"],
     range: "10x15 — 40x60 см",
+    gallery: ["/media/canvas-front-surface.jpg", "/media/v2/hero-canvas.jpg", "/media/v2/sound-touch.jpg"],
   },
 ];
 
@@ -153,7 +157,32 @@ export default function HlopokLandingV2() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ card: number; photo: number } | null>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const stepLightbox = useCallback((delta: number) => {
+    setLightbox((current) => {
+      if (!current) return current;
+      const total = catalogCards[current.card].gallery.length;
+      return { ...current, photo: (current.photo + delta + total) % total };
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowRight") stepLightbox(1);
+      if (event.key === "ArrowLeft") stepLightbox(-1);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox, closeLightbox, stepLightbox]);
 
   const playTension = async () => {
     setPulseKey((key) => key + 1);
@@ -354,10 +383,24 @@ export default function HlopokLandingV2() {
           </a>
         </div>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {catalogCards.map((card) => (
-            <article className="flex flex-col overflow-hidden border border-[#4d4b3a]/12 bg-white/48" key={card.title}>
-              <div className="relative h-32 bg-[#edece7]">
-                <Image src="/media/v2/product-card.jpg" alt="" fill className="object-cover" />
+          {catalogCards.map((card, cardIndex) => (
+            <button
+              type="button"
+              onClick={() => setLightbox({ card: cardIndex, photo: 0 })}
+              className="group flex flex-col overflow-hidden border border-[#4d4b3a]/12 bg-white/48 text-left transition hover:border-[#e59b6a]/60 hover:shadow-[0_18px_50px_rgba(77,75,58,0.08)]"
+              key={card.title}
+            >
+              <div className="relative h-40 overflow-hidden bg-[#edece7]">
+                <Image
+                  src={card.gallery[0]}
+                  alt={card.title}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                />
+                <span className="absolute bottom-3 right-3 rounded-full bg-[#fbfaf6]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4d4b3a]">
+                  {card.gallery.length} фото
+                </span>
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="min-h-14 font-serif text-2xl leading-7">{card.title}</h3>
@@ -368,10 +411,10 @@ export default function HlopokLandingV2() {
                 </ul>
                 <div className="mt-auto flex items-center justify-between pt-8 text-[13px] text-[#4d4b3a]/75">
                   <span>{card.range}</span>
-                  <span className="text-[#e59b6a]">→</span>
+                  <span className="text-[#e59b6a] transition group-hover:translate-x-1">→</span>
                 </div>
               </div>
-            </article>
+            </button>
           ))}
         </div>
         <div className="mt-6 flex flex-col gap-5 bg-[#4d4b3a] p-8 text-[#fbfaf6] md:flex-row md:items-center md:justify-between">
@@ -472,6 +515,84 @@ export default function HlopokLandingV2() {
         <span>© Хлопок, 2026. Производство холстов из хлопка</span>
         <span>Сделано в России с уважением к делу</span>
       </footer>
+
+      {lightbox ? (
+        <motion.div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#1f1e18]/85 px-4 py-10 backdrop-blur-sm"
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={catalogCards[lightbox.card].title}
+        >
+          <div className="relative flex w-full max-w-[1040px] flex-col" onClick={(event) => event.stopPropagation()}>
+            <div className="mb-4 flex items-center justify-between text-[#fbfaf6]">
+              <p className="font-serif text-xl md:text-2xl">{catalogCards[lightbox.card].title}</p>
+              <button
+                type="button"
+                onClick={closeLightbox}
+                aria-label="Закрыть"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 text-lg transition hover:bg-white/10"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[6px] bg-black/30 md:aspect-[16/10]">
+              <Image
+                key={catalogCards[lightbox.card].gallery[lightbox.photo]}
+                src={catalogCards[lightbox.card].gallery[lightbox.photo]}
+                alt={`${catalogCards[lightbox.card].title} — ракурс ${lightbox.photo + 1}`}
+                fill
+                sizes="(min-width: 768px) 1040px, 100vw"
+                className="object-contain"
+              />
+              {catalogCards[lightbox.card].gallery.length > 1 ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => stepLightbox(-1)}
+                    aria-label="Предыдущее фото"
+                    className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#fbfaf6]/90 text-lg text-[#4d4b3a] transition hover:bg-[#fbfaf6]"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => stepLightbox(1)}
+                    aria-label="Следующее фото"
+                    className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#fbfaf6]/90 text-lg text-[#4d4b3a] transition hover:bg-[#fbfaf6]"
+                  >
+                    ›
+                  </button>
+                </>
+              ) : null}
+            </div>
+
+            <div className="mt-4 flex items-center justify-between text-[#fbfaf6]/70">
+              <div className="flex gap-2">
+                {catalogCards[lightbox.card].gallery.map((src, index) => (
+                  <button
+                    type="button"
+                    key={src}
+                    onClick={() => setLightbox({ card: lightbox.card, photo: index })}
+                    aria-label={`Фото ${index + 1}`}
+                    className={`relative h-14 w-20 overflow-hidden rounded-[3px] border transition ${
+                      index === lightbox.photo ? "border-[#e59b6a]" : "border-white/20 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+                  </button>
+                ))}
+              </div>
+              <span className="text-[12px]">
+                {lightbox.photo + 1} / {catalogCards[lightbox.card].gallery.length}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      ) : null}
     </main>
   );
 }
