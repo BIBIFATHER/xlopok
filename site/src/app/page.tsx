@@ -1,5 +1,5 @@
-import HlopokLanding from "@/components/HlopokLanding";
+import HlopokLandingV2 from "@/components/HlopokLandingV2";
 
 export default function Home() {
-  return <HlopokLanding />;
+  return <HlopokLandingV2 />;
 }
