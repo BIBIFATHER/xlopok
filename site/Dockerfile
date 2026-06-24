@@ -15,6 +15,12 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+# Env могут прийти как build-arg (Timeweb) — фиксируем их в рантайм-окружение образа.
+# Publishable-ключ публичный по природе, безопасно.
+ARG SUPABASE_URL
+ARG SUPABASE_PUBLISHABLE_KEY
+ENV SUPABASE_URL=$SUPABASE_URL
+ENV SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
