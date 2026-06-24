@@ -243,23 +243,37 @@ export default function HlopokLandingV2() {
       return;
     }
 
-    const text = [
-      "Заявка с сайта Хлопок / v2",
-      `Имя: ${form.name || "-"}`,
-      `Контакт: ${form.contact || "-"}`,
-      `Что нужно: ${form.need || "-"}`,
-      `Реквизиты компании: ${form.company || "-"}`,
-      `Комментарий: ${form.comment || "-"}`,
-    ].join("\n");
+    setStatus("Отправляем заявку…");
 
     try {
-      await navigator.clipboard.writeText(text);
-      setStatus("Сообщение скопировано. Откроется Telegram — вставьте текст в чат.");
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("send failed");
+      setStatus("Заявка отправлена. Свяжемся с вами. Можно продублировать в Telegram.");
+      setForm(initialForm);
+      window.open(telegramUrl, "_blank", "noopener,noreferrer");
+      return;
     } catch {
-      setStatus("Откроется Telegram. Скопируйте детали заявки вручную.");
+      // Fallback: заявка не ушла на сервер — копируем в буфер и открываем Telegram.
+      const text = [
+        "Заявка с сайта Хлопок / v2",
+        `Имя: ${form.name || "-"}`,
+        `Контакт: ${form.contact || "-"}`,
+        `Что нужно: ${form.need || "-"}`,
+        `Реквизиты компании: ${form.company || "-"}`,
+        `Комментарий: ${form.comment || "-"}`,
+      ].join("\n");
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Не удалось отправить. Текст скопирован — вставьте в Telegram.");
+      } catch {
+        setStatus("Не удалось отправить. Скопируйте данные и напишите в Telegram.");
+      }
+      window.open(telegramUrl, "_blank", "noopener,noreferrer");
     }
-
-    window.open(telegramUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
