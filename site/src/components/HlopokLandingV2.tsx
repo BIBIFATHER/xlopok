@@ -9,7 +9,7 @@ const telegramUrl = "https://t.me/anosov.anton";
 const navItems = [
   { href: "#products", label: "Продукция" },
   { href: "#production", label: "Производство" },
-  { href: "#about", label: "Конструкция" },
+  { href: "#products", label: "Продукция" },
   { href: "#contacts", label: "Контакты" },
 ];
 
@@ -34,12 +34,6 @@ const steps = [
     text: "Ручная натяжка на деревянный подрамник. Проверяем натяжение и геометрию каждого холста.",
     icon: "frame",
   },
-];
-
-const constructionPoints = [
-  "Скругленные грани — бережное обращение с холстом",
-  "Усиленная натяжка — ровная поверхность",
-  "Крепление скобами в тыльную сторону — аккуратный вид",
 ];
 
 // Реальный ассортимент из PDF (BLI-130). Цены и условия сотрудничества не публикуем.
@@ -282,31 +276,9 @@ export default function HlopokLandingV2() {
         </div>
       </section>
 
-      <section id="about" className="mx-auto grid max-w-[1540px] gap-0 px-8 py-8 md:grid-cols-[0.47fr_0.53fr] md:px-14">
-        <figure className="relative min-h-[320px] overflow-hidden md:min-h-[470px]">
-          <Image src="/media/v2/construction-corner.jpg" alt="Угол холста на подрамнике" fill className="object-cover" />
-        </figure>
-        <div className="bg-[#eef0ea] px-10 py-12 md:px-16">
-          <SectionLabel value="04" />
-          <h2 className="font-serif text-5xl tracking-[-0.03em]">Конструкция</h2>
-          <p className="mt-8 max-w-[560px] text-[15px] leading-7 text-[#4d4b3a]/70">
-            Мы используем только высушенный сосновый брусок с точной геометрией. Подрамник не
-            поведёт со временем.
-          </p>
-          <ul className="mt-8 space-y-4 text-[15px] leading-6 text-[#4d4b3a]/78">
-            {constructionPoints.map((point) => (
-              <li className="flex gap-4" key={point}>
-                <span className="mt-3 h-px w-5 bg-[#e59b6a]" />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <section id="sound" className="mx-auto grid max-w-[1540px] gap-10 px-8 py-16 md:grid-cols-[0.44fr_0.56fr] md:px-14">
         <div>
-          <SectionLabel value="05" />
+          <SectionLabel value="04" />
           <h2 className="font-serif text-5xl leading-[1.05] tracking-[-0.03em]">
             Звук натяжения — наше качество
           </h2>
@@ -345,7 +317,7 @@ export default function HlopokLandingV2() {
       <section id="products" className="mx-auto max-w-[1540px] px-8 py-12 md:px-14">
         <div className="flex items-end justify-between gap-8 border-t border-[#4d4b3a]/16 pt-8">
           <div>
-            <SectionLabel value="06" />
+            <SectionLabel value="05" />
             <h2 className="font-serif text-5xl tracking-[-0.03em]">Размеры и материалы</h2>
           </div>
           <a className="hidden items-center gap-5 border-b border-[#e59b6a] pb-2 text-[12px] uppercase tracking-[0.08em] md:inline-flex" href="#contacts">
@@ -394,7 +366,7 @@ export default function HlopokLandingV2() {
 
       <section id="contacts" className="mx-auto grid max-w-[1540px] gap-10 px-8 py-16 md:grid-cols-[0.32fr_0.40fr_0.28fr] md:px-14">
         <div>
-          <SectionLabel value="07" />
+          <SectionLabel value="06" />
           <h2 className="font-serif text-5xl tracking-[-0.03em]">Расскажите, какой холст нужен</h2>
           <p className="mt-8 text-[15px] leading-7 text-[#4d4b3a]/72">
             Ответим в Telegram и подскажем по размеру, партии, материалу или заказной позиции.
