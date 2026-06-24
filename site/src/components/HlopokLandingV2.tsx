@@ -8,8 +8,8 @@ const telegramUrl = "https://t.me/anosov.anton";
 
 const navItems = [
   { href: "#production", label: "Производство" },
-  { href: "#sound", label: "Звук" },
   { href: "#products", label: "Продукция" },
+  { href: "#sound", label: "Звук" },
   { href: "#contacts", label: "Контакты" },
 ];
 
