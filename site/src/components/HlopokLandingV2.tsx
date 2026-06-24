@@ -151,6 +151,7 @@ export default function HlopokLandingV2() {
   const [pulseKey, setPulseKey] = useState(0);
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
   const playTension = async () => {
@@ -197,7 +198,18 @@ export default function HlopokLandingV2() {
     <main className="min-h-screen bg-[#fbfaf6] text-[#4d4b3a]">
       <audio ref={audioRef} preload="auto" src="/media/canvas-tension-hit.m4a" />
 
-      <header className="relative z-50 mx-auto flex max-w-[1720px] items-center justify-end gap-8 px-8 py-7 md:justify-between md:px-14">
+      <header className="relative z-50 mx-auto flex max-w-[1720px] items-center justify-between gap-6 px-8 py-7 md:px-14">
+        <button
+          type="button"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
+          aria-label="Меню"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((value) => !value)}
+        >
+          <span className={`h-px w-6 bg-[#4d4b3a] transition ${mobileOpen ? "translate-y-[6px] rotate-45" : ""}`} />
+          <span className={`h-px w-6 bg-[#4d4b3a] transition ${mobileOpen ? "opacity-0" : ""}`} />
+          <span className={`h-px w-6 bg-[#4d4b3a] transition ${mobileOpen ? "-translate-y-[6px] -rotate-45" : ""}`} />
+        </button>
         <nav className="hidden items-center gap-20 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#4d4b3a]/70 md:flex">
           {navItems.map((item) => (
             <a className="transition hover:text-[#4d4b3a]" href={item.href} key={item.href}>
@@ -206,13 +218,30 @@ export default function HlopokLandingV2() {
           ))}
         </nav>
         <a
-          className="rounded-[3px] bg-[#4d4b3a] px-8 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#fbfaf6]"
+          className="rounded-[3px] bg-[#4d4b3a] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#fbfaf6] md:px-8"
           href={telegramUrl}
           target="_blank"
           rel="noreferrer"
         >
           Связаться с нами
         </a>
+
+        {mobileOpen ? (
+          <div className="absolute left-0 right-0 top-full border-t border-[#4d4b3a]/12 bg-[#fbfaf6] px-8 py-6 md:hidden">
+            <nav className="flex flex-col gap-5 text-[13px] font-semibold uppercase tracking-[0.12em] text-[#4d4b3a]/80">
+              {navItems.map((item) => (
+                <a
+                  className="transition hover:text-[#4d4b3a]"
+                  href={item.href}
+                  key={item.href}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        ) : null}
       </header>
 
       <section className="relative mx-auto max-w-[1720px] px-8 pb-12 md:px-14">
