@@ -153,6 +153,8 @@ function Waveform({ pulseKey, reduce }: { pulseKey: number; reduce: boolean | nu
 
 export default function HlopokLandingV2() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const [pulseKey, setPulseKey] = useState(0);
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState("");
@@ -160,6 +162,7 @@ export default function HlopokLandingV2() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lightbox, setLightbox] = useState<{ card: number; photo: number } | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const lightboxOpen = lightbox !== null;
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
   const stepLightbox = useCallback((delta: number) => {
@@ -170,12 +173,46 @@ export default function HlopokLandingV2() {
     });
   }, []);
 
+  // Lightbox: scroll-lock, focus-trap, restore focus on close.
   useEffect(() => {
-    if (!lightbox) return;
+    if (!lightboxOpen) return;
+    const dialog = dialogRef.current;
+    const previouslyFocused = triggerRef.current;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowRight") stepLightbox(1);
-      if (event.key === "ArrowLeft") stepLightbox(-1);
+      else if (event.key === "ArrowRight") stepLightbox(1);
+      else if (event.key === "ArrowLeft") stepLightbox(-1);
+      else if (event.key === "Tab") {
+        const focusables = dialog?.querySelectorAll<HTMLElement>(
+          'button, a[href], [tabindex]:not([tabindex="-1"])',
+        );
+        if (!focusables || focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    dialog?.focus();
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+      previouslyFocused?.focus();
+    };
+  }, [lightboxOpen, closeLightbox, stepLightbox]);
+
+  // Mobile menu: scroll-lock + Esc to close.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -183,7 +220,7 @@ export default function HlopokLandingV2() {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [lightbox, closeLightbox, stepLightbox]);
+  }, [mobileOpen]);
 
   const playTension = async () => {
     setPulseKey((key) => key + 1);
@@ -258,8 +295,16 @@ export default function HlopokLandingV2() {
         </a>
 
         {mobileOpen ? (
-          <div className="absolute left-0 right-0 top-full border-t border-[#4d4b3a]/12 bg-[#fbfaf6] px-8 py-6 md:hidden">
-            <nav className="flex flex-col gap-5 text-[13px] font-semibold uppercase tracking-[0.12em] text-[#4d4b3a]/80">
+          <>
+            <button
+              type="button"
+              aria-hidden="true"
+              tabIndex={-1}
+              className="fixed inset-0 z-40 bg-[#1f1e18]/20 md:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            <div className="absolute left-0 right-0 top-full border-t border-[#4d4b3a]/12 bg-[#fbfaf6] px-8 py-6 md:hidden">
+              <nav className="flex flex-col gap-5 text-[13px] font-semibold uppercase tracking-[0.12em] text-[#4d4b3a]/80">
               {navItems.map((item) => (
                 <a
                   className="transition hover:text-[#4d4b3a]"
@@ -270,8 +315,9 @@ export default function HlopokLandingV2() {
                   {item.label}
                 </a>
               ))}
-            </nav>
-          </div>
+              </nav>
+            </div>
+          </>
         ) : null}
       </header>
 
@@ -387,7 +433,10 @@ export default function HlopokLandingV2() {
           {catalogCards.map((card, cardIndex) => (
             <button
               type="button"
-              onClick={() => setLightbox({ card: cardIndex, photo: 0 })}
+              onClick={(event) => {
+                triggerRef.current = event.currentTarget;
+                setLightbox({ card: cardIndex, photo: 0 });
+              }}
               className="group flex flex-col overflow-hidden border border-[#4d4b3a]/12 bg-white/48 text-left transition hover:border-[#e59b6a]/60 hover:shadow-[0_18px_50px_rgba(77,75,58,0.08)]"
               key={card.title}
             >
@@ -516,7 +565,9 @@ export default function HlopokLandingV2() {
 
       {lightbox ? (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#1f1e18]/85 px-4 py-10 backdrop-blur-sm"
+          ref={dialogRef}
+          tabIndex={-1}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#1f1e18]/85 px-4 py-10 outline-none backdrop-blur-sm"
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={closeLightbox}
