@@ -7,7 +7,6 @@ import { motion, useReducedMotion } from "motion/react";
 const telegramUrl = "https://t.me/anosov.anton";
 
 const navItems = [
-  { href: "#products", label: "Продукция" },
   { href: "#production", label: "Производство" },
   { href: "#products", label: "Продукция" },
   { href: "#contacts", label: "Контакты" },
