@@ -30,7 +30,12 @@ export async function POST(request: Request) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) {
-    return Response.json({ error: "not configured" }, { status: 500 });
+    // Временная диагностика: какие SUPABASE_*-переменные видит рантайм (без значений).
+    const seen = Object.keys(process.env).filter((k) => k.includes("SUPABASE"));
+    return Response.json(
+      { error: "not configured", hasUrl: !!url, hasKey: !!key, seen },
+      { status: 500 },
+    );
   }
 
   const res = await fetch(`${url}/rest/v1/leads`, {
