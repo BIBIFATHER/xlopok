@@ -156,6 +156,7 @@ export default function HlopokLandingV2() {
   const [pulseKey, setPulseKey] = useState(0);
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState("");
+  const [soundStatus, setSoundStatus] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lightbox, setLightbox] = useState<{ card: number; photo: number } | null>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -194,7 +195,7 @@ export default function HlopokLandingV2() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.currentTime = 0;
-    await audio.play().catch(() => setStatus("Нажмите ещё раз: браузер ждёт явный запуск звука."));
+    await audio.play().catch(() => setSoundStatus("Нажмите ещё раз: браузер ждёт явный запуск звука."));
   };
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -354,8 +355,8 @@ export default function HlopokLandingV2() {
             </button>
             <Waveform pulseKey={pulseKey} reduce={shouldReduceMotion} />
           </div>
-          {status && pulseKey > 0 ? (
-            <p className="mt-4 text-[13px] leading-6 text-[#4d4b3a]/55">{status}</p>
+          {soundStatus ? (
+            <p className="mt-4 text-[13px] leading-6 text-[#4d4b3a]/55">{soundStatus}</p>
           ) : null}
         </div>
         <figure className="relative min-h-[260px] overflow-hidden md:min-h-[360px]">
