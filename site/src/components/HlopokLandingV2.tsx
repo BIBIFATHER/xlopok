@@ -398,9 +398,6 @@ export default function HlopokLandingV2() {
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="object-cover transition duration-500 group-hover:scale-[1.04]"
                 />
-                <span className="absolute bottom-3 right-3 rounded-full bg-[#fbfaf6]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4d4b3a]">
-                  {card.gallery.length} фото
-                </span>
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="min-h-14 font-serif text-2xl leading-7">{card.title}</h3>
