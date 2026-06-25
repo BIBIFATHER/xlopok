@@ -277,7 +277,7 @@ export default function HlopokLandingV2() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#fbfaf6] text-[#4d4b3a]">
+    <main className="min-h-screen overflow-x-clip bg-[#fbfaf6] text-[#4d4b3a]">
       <audio ref={audioRef} preload="auto" src="/media/canvas-tension-hit.m4a" />
 
       <header className="relative z-50 mx-auto flex max-w-[1720px] items-center justify-between gap-6 px-8 py-7 md:px-14">
@@ -336,7 +336,7 @@ export default function HlopokLandingV2() {
       </header>
 
       <section className="relative mx-auto max-w-[1720px] px-8 pb-12 md:px-14">
-        <h1 className="relative z-10 font-serif text-[clamp(3rem,13vw,4.6rem)] font-semibold leading-[0.85] tracking-[-0.03em] text-[#4d4b3a] md:-ml-2 md:text-[clamp(6.7rem,19vw,24rem)] md:leading-[0.74] md:tracking-[-0.075em]">
+        <h1 className="relative z-10 font-serif text-[clamp(3rem,13vw,4.6rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[#4d4b3a] md:-ml-2 md:text-[clamp(6.7rem,19vw,24rem)] md:leading-[0.74] md:tracking-[-0.075em]">
           Хлопок
         </h1>
         <div className="relative -mt-4 grid items-end md:-mt-10 md:grid-cols-[0.34fr_0.66fr]">
