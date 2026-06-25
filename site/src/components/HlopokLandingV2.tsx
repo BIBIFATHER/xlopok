@@ -277,7 +277,7 @@ export default function HlopokLandingV2() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-clip bg-[#fbfaf6] text-[#4d4b3a]">
+    <main className="min-h-screen bg-[#fbfaf6] text-[#4d4b3a] md:overflow-x-clip">
       <audio ref={audioRef} preload="auto" src="/media/canvas-tension-hit.m4a" />
 
       <header className="relative z-50 mx-auto flex max-w-[1720px] items-center justify-between gap-6 px-8 py-7 md:px-14">
