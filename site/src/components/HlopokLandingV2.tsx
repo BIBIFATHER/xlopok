@@ -559,7 +559,7 @@ export default function HlopokLandingV2() {
         </form>
         <address className="not-italic bg-[#eef0ea] p-8 text-[15px] leading-7 text-[#4d4b3a]/72">
           <p>
-            <a href="tel:+79166332732">+7 916 633-27-32</a>
+            <a href="tel:+79167948587">+7 916 794-85-87</a>
           </p>
           <p>Пн-Пт 10:00 - 18:00</p>
           <p className="mt-6">
