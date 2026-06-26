@@ -563,7 +563,7 @@ export default function HlopokLandingV2() {
           </p>
           <p>Пн-Пт 10:00 - 18:00</p>
           <p className="mt-6">
-            <a href="mailto:anosov.anton@gmail.com">anosov.anton@gmail.com</a>
+            <a href="mailto:sales@canvaslab.ru">sales@canvaslab.ru</a>
           </p>
           <p className="mt-6">Россия и СНГ. Отгрузка по согласованию.</p>
           <a className="mt-8 inline-block text-[12px] uppercase tracking-[0.08em] text-[#e59b6a]" href={telegramUrl} target="_blank" rel="noreferrer">
