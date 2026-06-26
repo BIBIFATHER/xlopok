@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
-const telegramUrl = "https://t.me/anosov.anton";
+const telegramUrl = "https://t.me/canvas_lab";
 
 const navItems = [
   { href: "#production", label: "Производство" },
