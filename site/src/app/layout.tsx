@@ -14,7 +14,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://site-kappa-lemon-77.vercel.app"),
+  metadataBase: new URL("https://canvaslab.ru"),
   title: "Хлопок - холсты на подрамнике",
   description:
     "Производство холстов на подрамнике для студий, художников и оптовых клиентов по России и СНГ.",
