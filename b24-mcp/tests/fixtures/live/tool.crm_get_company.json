@@ -1,0 +1,19 @@
+{
+  "company": {
+    "id": 11776,
+    "title": "Компания-256",
+    "assignedById": 1,
+    "phones": [],
+    "emails": [],
+    "website": null,
+    "city": null,
+    "industry": "Компания-485",
+    "createdAt": "2026-07-25T10:36:11.000Z",
+    "updatedAt": "2026-07-25T10:59:14.000Z",
+    "custom": {}
+  },
+  "contacts": [],
+  "open_deals": [],
+  "recent_activities": [],
+  "next_action": null
+}

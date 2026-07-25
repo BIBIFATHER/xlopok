@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-25T19:13:58.917Z",
+  "count": 1,
+  "items": [
+    {
+      "id": 4,
+      "title": "Компания-703",
+      "stageId": "NEW",
+      "opportunity": 0,
+      "currencyId": "RUB",
+      "companyId": 0,
+      "assignedById": 1,
+      "stageChangedAt": "2026-07-25T19:09:06.000Z",
+      "daysSinceStageChange": 0
+    }
+  ]
+}

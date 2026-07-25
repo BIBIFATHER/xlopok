@@ -1,0 +1,35 @@
+{
+  "deal": {
+    "id": 4,
+    "title": "Компания-703",
+    "categoryId": 0,
+    "stageId": "NEW",
+    "closed": false,
+    "opportunity": 0,
+    "currencyId": "RUB",
+    "companyId": 0,
+    "contactIds": [
+      4
+    ],
+    "assignedById": 1,
+    "createdAt": "2026-07-25T19:09:06.000Z",
+    "updatedAt": "2026-07-25T19:09:06.000Z",
+    "stageChangedAt": "2026-07-25T19:09:06.000Z",
+    "expectedCloseAt": "2026-08-01T00:00:00.000Z",
+    "custom": {}
+  },
+  "company": null,
+  "contacts": [
+    {
+      "id": 4,
+      "fullName": "Контакт-102",
+      "post": null,
+      "phones": [],
+      "emails": [],
+      "companyId": 0
+    }
+  ],
+  "recent_activities": [],
+  "next_action": null,
+  "loss_reason": null
+}

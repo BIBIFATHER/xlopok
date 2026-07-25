@@ -1,0 +1,29 @@
+{
+  "contact": {
+    "id": 4,
+    "fullName": "Контакт-102",
+    "firstName": "Контакт-102",
+    "lastName": null,
+    "post": null,
+    "companyId": 0,
+    "assignedById": 1,
+    "phones": [],
+    "emails": [],
+    "createdAt": "2026-07-25T19:09:05.000Z",
+    "updatedAt": "2026-07-25T19:09:05.000Z"
+  },
+  "company": null,
+  "deals": [
+    {
+      "id": 4,
+      "title": "Компания-703",
+      "stageId": "NEW",
+      "opportunity": 0,
+      "currencyId": "RUB",
+      "companyId": 0,
+      "assignedById": 1,
+      "stageChangedAt": "2026-07-25T19:09:06.000Z"
+    }
+  ],
+  "recent_activities": []
+}

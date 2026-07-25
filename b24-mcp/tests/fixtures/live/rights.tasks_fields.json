@@ -1,0 +1,574 @@
+{
+  "items": [
+    {
+      "name": "Контакт-137",
+      "type": "int",
+      "filterable": true,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-662",
+      "type": "string",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-260",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-389",
+      "type": "int",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-635",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-394",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-797",
+      "type": "int",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-281",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-688",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-339",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-460",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-902",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-453",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-270",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-459",
+      "type": "int",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-435",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-317",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-899",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-824",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-149",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-157",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-837",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-834",
+      "type": "string",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-152",
+      "type": "string",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-225",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-140",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-957",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-901",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-981",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-578",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-434",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-900",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-187",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-693",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-783",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-592",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-184",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-268",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-520",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-268",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-789",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-941",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-847",
+      "type": "int",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-727",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-110",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-513",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-811",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-879",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-591",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-400",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-363",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-758",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-817",
+      "type": "object",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-486",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-522",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-639",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-439",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-451",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-889",
+      "type": "string",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-554",
+      "type": "bool",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-933",
+      "type": "bool",
+      "filterable": false,
+      "sortable": true
+    },
+    {
+      "name": "Контакт-581",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-280",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-745",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-717",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-318",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-563",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-288",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-839",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-665",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-196",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-589",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-662",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-941",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-493",
+      "type": "string",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-423",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-995",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-102",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-230",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-797",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-797",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-818",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-405",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-600",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-116",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-325",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-524",
+      "type": "int",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-242",
+      "type": "bool",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-692",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-637",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-970",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-953",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-747",
+      "type": "object",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-194",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    },
+    {
+      "name": "Контакт-665",
+      "type": "array",
+      "filterable": false,
+      "sortable": false
+    }
+  ]
+}
