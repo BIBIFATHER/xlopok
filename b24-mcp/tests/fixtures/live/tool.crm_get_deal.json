@@ -1,39 +1,32 @@
 {
   "deal": {
-    "id": 2,
-    "title": "Компания-811",
+    "id": 4,
+    "title": "Компания-703",
     "categoryId": 0,
     "stageId": "NEW",
     "closed": false,
-    "opportunity": 150000,
+    "opportunity": 0,
     "currencyId": "RUB",
-    "companyId": 2,
+    "companyId": 0,
     "contactIds": [
-      2
+      4
     ],
     "assignedById": 1,
-    "createdAt": "2026-07-25T06:10:29.000Z",
-    "updatedAt": "2026-07-25T06:10:29.000Z",
-    "stageChangedAt": "2026-07-25T06:10:29.000Z",
+    "createdAt": "2026-07-25T19:09:06.000Z",
+    "updatedAt": "2026-07-25T19:09:06.000Z",
+    "stageChangedAt": "2026-07-25T19:09:06.000Z",
     "expectedCloseAt": "2026-08-01T00:00:00.000Z",
     "custom": {}
   },
-  "company": {
-    "id": 2,
-    "title": "Компания-997",
-    "city": null,
-    "phones": [],
-    "emails": [],
-    "assignedById": 1
-  },
+  "company": null,
   "contacts": [
     {
-      "id": 2,
-      "fullName": "Контакт-413",
-      "post": "Компания-451",
+      "id": 4,
+      "fullName": "Контакт-102",
+      "post": null,
       "phones": [],
       "emails": [],
-      "companyId": 2
+      "companyId": 0
     }
   ],
   "recent_activities": [],

@@ -1,6 +1,47 @@
 {
   "matched_by": "title",
-  "total": 0,
-  "next_offset": null,
-  "items": []
+  "total": 144,
+  "next_offset": 50,
+  "items": [
+    {
+      "id": 21230,
+      "title": "Компания-269",
+      "city": null,
+      "phones": [],
+      "emails": [],
+      "assignedById": 1
+    },
+    {
+      "id": 21170,
+      "title": "Компания-369",
+      "city": null,
+      "phones": [],
+      "emails": [],
+      "assignedById": 1
+    },
+    {
+      "id": 21168,
+      "title": "Компания-332",
+      "city": null,
+      "phones": [],
+      "emails": [],
+      "assignedById": 1
+    },
+    {
+      "id": 21166,
+      "title": "Компания-849",
+      "city": null,
+      "phones": [],
+      "emails": [],
+      "assignedById": 1
+    },
+    {
+      "id": 19012,
+      "title": "Компания-553",
+      "city": null,
+      "phones": [],
+      "emails": [],
+      "assignedById": 1
+    }
+  ]
 }

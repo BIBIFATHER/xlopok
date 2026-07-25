@@ -3,14 +3,14 @@
   "next_offset": null,
   "items": [
     {
-      "id": 2,
-      "title": "Компания-811",
+      "id": 4,
+      "title": "Компания-703",
       "stageId": "NEW",
-      "opportunity": 150000,
+      "opportunity": 0,
       "currencyId": "RUB",
-      "companyId": 2,
+      "companyId": 0,
       "assignedById": 1,
-      "stageChangedAt": "2026-07-25T06:10:29.000Z"
+      "stageChangedAt": "2026-07-25T19:09:06.000Z"
     }
   ]
 }
