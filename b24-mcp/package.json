@@ -1,0 +1,42 @@
+{
+  "name": "canvas-lab-b24-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Safe read-only MCP gateway to Bitrix24 CRM for Canvas Lab",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "canvas-lab-b24-mcp": "dist/mcp/server.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node --env-file-if-exists=.env dist/mcp/server.js",
+    "dev": "node --env-file-if-exists=.env node_modules/.bin/tsx src/mcp/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "import:dry-run": "tsx src/import/run-import.ts",
+    "import:csv": "tsx src/import/export-bitrix-csv.ts",
+    "validate:live": "node --env-file=.env node_modules/.bin/tsx src/validation/live-readonly.ts",
+    "secret-scan": "node scripts/secret-scan.mjs",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "exceljs": "^4.4.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.17.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.8"
+  }
+}

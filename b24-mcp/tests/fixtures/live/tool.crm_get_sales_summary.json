@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-07-25T06:11:11.808Z",
+  "scope": {
+    "assignedById": null,
+    "categoryId": null,
+    "inactivityDays": 14
+  },
+  "openDeals": {
+    "count": 1,
+    "totalOpportunity": 150000,
+    "currency": "RUB"
+  },
+  "byStage": [
+    {
+      "stageId": "NEW",
+      "count": 1,
+      "totalOpportunity": 150000
+    }
+  ],
+  "overdueFollowups": 0,
+  "dealsWithoutNextAction": 1,
+  "dealsWithoutActivityInPeriod": 1,
+  "truncated": false
+}

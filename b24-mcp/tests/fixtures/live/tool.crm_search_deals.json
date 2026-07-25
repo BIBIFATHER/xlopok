@@ -1,0 +1,16 @@
+{
+  "total": 1,
+  "next_offset": null,
+  "items": [
+    {
+      "id": 2,
+      "title": "Компания-811",
+      "stageId": "NEW",
+      "opportunity": 150000,
+      "currencyId": "RUB",
+      "companyId": 2,
+      "assignedById": 1,
+      "stageChangedAt": "2026-07-25T06:10:29.000Z"
+    }
+  ]
+}

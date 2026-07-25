@@ -1,0 +1,36 @@
+{
+  "contact": {
+    "id": 2,
+    "fullName": "Контакт-413",
+    "firstName": "Контакт-131",
+    "lastName": "Контакт-620",
+    "post": "Компания-451",
+    "companyId": 2,
+    "assignedById": 1,
+    "phones": [],
+    "emails": [],
+    "createdAt": "2026-07-25T06:10:29.000Z",
+    "updatedAt": "2026-07-25T06:10:29.000Z"
+  },
+  "company": {
+    "id": 2,
+    "title": "Компания-997",
+    "city": null,
+    "phones": [],
+    "emails": [],
+    "assignedById": 1
+  },
+  "deals": [
+    {
+      "id": 2,
+      "title": "Компания-811",
+      "stageId": "NEW",
+      "opportunity": 150000,
+      "currencyId": "RUB",
+      "companyId": 2,
+      "assignedById": 1,
+      "stageChangedAt": "2026-07-25T06:10:29.000Z"
+    }
+  ],
+  "recent_activities": []
+}

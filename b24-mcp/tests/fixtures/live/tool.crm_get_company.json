@@ -1,0 +1,39 @@
+{
+  "company": {
+    "id": 2,
+    "title": "Компания-997",
+    "assignedById": 1,
+    "phones": [],
+    "emails": [],
+    "website": null,
+    "city": null,
+    "industry": "Компания-485",
+    "createdAt": "2026-07-25T06:10:28.000Z",
+    "updatedAt": "2026-07-25T06:10:28.000Z",
+    "custom": {}
+  },
+  "contacts": [
+    {
+      "id": 2,
+      "fullName": "Контакт-413",
+      "post": "Компания-451",
+      "phones": [],
+      "emails": [],
+      "companyId": 2
+    }
+  ],
+  "open_deals": [
+    {
+      "id": 2,
+      "title": "Компания-811",
+      "stageId": "NEW",
+      "opportunity": 150000,
+      "currencyId": "RUB",
+      "companyId": 2,
+      "assignedById": 1,
+      "stageChangedAt": "2026-07-25T06:10:29.000Z"
+    }
+  ],
+  "recent_activities": [],
+  "next_action": null
+}

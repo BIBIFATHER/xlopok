@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.local
+*.log
+
+# Персональные данные и состояние шлюза: исходная база, подготовленные
+# импорты, назначения, метрики, audit log, dead-letter queue.
+data/
+!data/.gitkeep
+
+.DS_Store

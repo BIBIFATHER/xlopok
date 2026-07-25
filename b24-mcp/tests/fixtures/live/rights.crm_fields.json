@@ -1,0 +1,25 @@
+{
+  "fieldNames": [
+    "id",
+    "title",
+    "typeId",
+    "categoryId",
+    "logo",
+    "bankingDetails",
+    "industry",
+    "employees",
+    "currencyId",
+    "revenue",
+    "opened",
+    "comments",
+    "hasPhone",
+    "hasEmail",
+    "hasImol",
+    "isMyCompany",
+    "assignedById",
+    "createdBy",
+    "updatedBy",
+    "lastActivityBy"
+  ],
+  "customCount": 0
+}
