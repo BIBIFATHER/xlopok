@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T11:57:33.741Z",
+  "generatedAt": "2026-07-28T18:13:19.011Z",
   "widths": [
     480,
     768,
@@ -443,6 +443,300 @@
           ]
         },
         "source": "03-edge.png"
+      }
+    ],
+    "hero": [
+      {
+        "id": "hero/01-corner",
+        "alt": "Угол холста из 100% хлопка на деревянном подрамнике: ровный загиб ткани, скобы крепления и торец рамы",
+        "width": 1122,
+        "height": 1402,
+        "aspect": 0.8003,
+        "blur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBACdASoUABkAPt1WpUyopKOiN/VYARAbiWUAtQjmQepzfu6h8wCxkAAA/uz5g916weCeE6heCHhEQYpeBjig6Eycn6ZFeFhtPDA60aYJNB5N06ZqCPjFOPASBc7BX41vKXyzB1U9gjymHabSSxN4BWgBm+PJAAA=",
+        "full": {
+          "avif": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.avif",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.avif",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.avif",
+              "width": 1122,
+              "height": 1402
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.webp",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.webp",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.webp",
+              "width": 1122,
+              "height": 1402
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.jpg",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.jpg",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.jpg",
+              "width": 1122,
+              "height": 1402
+            }
+          ]
+        },
+        "card": {
+          "avif": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.avif",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.avif",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.avif",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.avif",
+              "width": 768,
+              "height": 576
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.webp",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.webp",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.jpg",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.jpg",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.jpg",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.jpg",
+              "width": 768,
+              "height": 576
+            }
+          ]
+        },
+        "source": "01-corner.png"
+      }
+    ],
+    "production": [
+      {
+        "id": "production/01-machine",
+        "alt": "Рулон хлопкового полотна на производственной линии в цехе",
+        "width": 1448,
+        "height": 1086,
+        "aspect": 1.3333,
+        "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUAS2wxGCnmAYPbpnvkAA+OXEwmwsJEgfxI4COUjGAU9H6en4vaN956Hu4vxVplzZtwXehkN/aYnjHn0Zl6aJZgO5iuRuLgwwpuAESWiKTKEbqzeWLrtBcVxJfUnAS21l4I6rOdfVHvjd3nFAAAA=",
+        "full": {
+          "avif": [
+            {
+              "src": "/media/catalog/production/01-machine-480.avif",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-768.avif",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1200.avif",
+              "width": 1200,
+              "height": 900
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1448.avif",
+              "width": 1448,
+              "height": 1086
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/production/01-machine-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-768.webp",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1200.webp",
+              "width": 1200,
+              "height": 900
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1448.webp",
+              "width": 1448,
+              "height": 1086
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/production/01-machine-480.jpg",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-768.jpg",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1200.jpg",
+              "width": 1200,
+              "height": 900
+            },
+            {
+              "src": "/media/catalog/production/01-machine-1448.jpg",
+              "width": 1448,
+              "height": 1086
+            }
+          ]
+        },
+        "card": {
+          "avif": [
+            {
+              "src": "/media/catalog/production/01-machine-card-160.avif",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-320.avif",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-480.avif",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-768.avif",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-1200.avif",
+              "width": 1200,
+              "height": 900
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/production/01-machine-card-160.webp",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-320.webp",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-768.webp",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-1200.webp",
+              "width": 1200,
+              "height": 900
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/production/01-machine-card-160.jpg",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-320.jpg",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-480.jpg",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-768.jpg",
+              "width": 768,
+              "height": 576
+            },
+            {
+              "src": "/media/catalog/production/01-machine-card-1200.jpg",
+              "width": 1200,
+              "height": 900
+            }
+          ]
+        },
+        "source": "01-machine.png"
       }
     ],
     "stretcher-coarse": [

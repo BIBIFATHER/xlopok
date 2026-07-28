@@ -112,7 +112,9 @@ async function buildPhoto({ slug, file, name, alt, index }) {
 
   const variants = {};
   const widths = WIDTHS.filter((w) => w <= srcWidth * 1.02);
-  if (widths.length === 0) widths.push(srcWidth);
+  // Исходник между ступенями (например 1122 при ступенях 768 и 1200) — добавляем
+  // его нативную ширину, иначе браузеру достаётся сильно уменьшенный вариант.
+  if (widths.length === 0 || srcWidth > widths[widths.length - 1] * 1.1) widths.push(srcWidth);
 
   for (const format of FORMATS) {
     variants[format.ext] = [];
