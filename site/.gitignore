@@ -24,6 +24,14 @@
 .DS_Store
 *.pem
 
+# originals of catalog photos: heavy, not needed for deploy.
+# Web versions (public/media/catalog) and the manifest ARE committed.
+photos-src/**
+!photos-src/README.md
+# Папки нужно разыменовать явно: git не заходит внутрь исключённой директории.
+!photos-src/*/
+!photos-src/*/alt.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

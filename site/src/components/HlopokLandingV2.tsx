@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import CatalogPhoto from "@/components/CatalogPhoto";
+import { absoluteUrl, largest, photosFor, type CatalogPhoto as CatalogPhotoData } from "@/lib/photos";
 
 const telegramUrl = "https://t.me/canvas_lab";
 
@@ -37,27 +39,83 @@ const steps = [
 ];
 
 // Реальный ассортимент из PDF (BLI-130). Цены и условия сотрудничества не публикуем.
-// gallery — временные фото-ракурсы, заменить на реальные снимки каждого типа.
+// slug = папка в photos-src/<slug>/ и в public/media/catalog/<slug>/.
+// gallery — легаси-фолбэк: показывается, пока для slug не собраны фото (npm run photos).
 const catalogCards = [
   {
+    slug: "stretcher-fine",
     title: "Подрамник / мелкое и среднее зерно",
     meta: ["100% хлопок", "Плотность: 280 / 300 г/м2", "Грунт: акриловый", "Профиль: 16x23 / 18x28 / 20x42 мм"],
     range: "15x15 — 100x150 см",
     gallery: ["/media/v2/hero-canvas.jpg", "/media/canvas-front-surface.jpg", "/media/v2/construction-corner.jpg"],
   },
   {
+    slug: "stretcher-coarse",
     title: "Подрамник / крупное зерно",
     meta: ["100% хлопок, двунитка", "Плотность: 430 г/м2", "Грунт: акриловый", "Профиль: 18x28 / 20x42 мм"],
     range: "18x24 — 100x150 см",
     gallery: ["/media/canvas-back-frame.jpg", "/media/canvas-stretch-process.jpg", "/media/v2/construction-corner.jpg"],
   },
   {
+    slug: "canvas-board",
     title: "Холст на картоне",
     meta: ["100% хлопок, мелкое зерно", "Плотность: 280 г/м2", "Грунт: акриловый", "Картон: 2.5 / 3 мм"],
     range: "10x15 — 40x60 см",
     gallery: ["/media/canvas-front-surface.jpg", "/media/v2/hero-canvas.jpg", "/media/v2/sound-touch.jpg"],
   },
 ];
+
+type GallerySlide =
+  | { kind: "managed"; key: string; photo: CatalogPhotoData; alt: string }
+  | { kind: "legacy"; key: string; src: string; alt: string };
+
+/** Собранные фото из манифеста, иначе — старые картинки, чтобы страница не ломалась. */
+function slidesFor(card: (typeof catalogCards)[number]): GallerySlide[] {
+  const managed = photosFor(card.slug);
+  if (managed.length > 0) {
+    return managed.map((photo, index) => ({
+      kind: "managed",
+      key: photo.id,
+      photo,
+      alt: photo.alt || `${card.title} — ракурс ${index + 1}`,
+    }));
+  }
+  return card.gallery.map((src, index) => ({
+    kind: "legacy",
+    key: src,
+    src,
+    alt: `${card.title} — ракурс ${index + 1}`,
+  }));
+}
+
+const catalogSlides = catalogCards.map(slidesFor);
+
+// Product-разметка: поисковики берут отсюда фото и характеристики товара.
+const catalogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: catalogCards.map((card, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: card.title,
+      description: `${card.meta.join(". ")}. Размеры: ${card.range}.`,
+      brand: { "@type": "Brand", name: "Хлопок" },
+      material: "100% хлопок",
+      image: catalogSlides[index].map((slide) =>
+        absoluteUrl(slide.kind === "managed" ? (largest(slide.photo.full.jpg)?.src ?? "") : slide.src),
+      ),
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "RUB",
+        url: "https://canvaslab.ru/#products",
+        seller: { "@type": "Organization", name: "Хлопок" },
+      },
+    },
+  })),
+};
 
 type FormState = {
   name: string;
@@ -168,10 +226,35 @@ export default function HlopokLandingV2() {
   const stepLightbox = useCallback((delta: number) => {
     setLightbox((current) => {
       if (!current) return current;
-      const total = catalogCards[current.card].gallery.length;
+      const total = catalogSlides[current.card].length;
       return { ...current, photo: (current.photo + delta + total) % total };
     });
   }, []);
+
+  // Свайпы: по горизонтали листаем, вниз — закрываем. На телефоне это
+  // единственный способ управлять лайтбоксом, кроме кнопок.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = useCallback((event: React.TouchEvent) => {
+    const touch = event.changedTouches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+  const onTouchEnd = useCallback(
+    (event: React.TouchEvent) => {
+      const start = touchStart.current;
+      touchStart.current = null;
+      if (!start) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      const THRESHOLD = 48;
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (Math.abs(dx) > THRESHOLD) stepLightbox(dx < 0 ? 1 : -1);
+      } else if (dy > THRESHOLD) {
+        closeLightbox();
+      }
+    },
+    [closeLightbox, stepLightbox],
+  );
 
   // Lightbox: scroll-lock, focus-trap, restore focus on close.
   useEffect(() => {
@@ -434,6 +517,7 @@ export default function HlopokLandingV2() {
       </section>
 
       <section id="products" className="mx-auto max-w-[1540px] px-8 py-12 md:px-14">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogJsonLd) }} />
         <div className="flex items-end justify-between gap-8 border-t border-[#4d4b3a]/16 pt-8">
           <div>
             <SectionLabel value="05" />
@@ -454,14 +538,26 @@ export default function HlopokLandingV2() {
               className="group flex flex-col overflow-hidden border border-[#4d4b3a]/12 bg-white/48 text-left transition hover:border-[#e59b6a]/60 hover:shadow-[0_18px_50px_rgba(77,75,58,0.08)]"
               key={card.title}
             >
-              <div className="relative h-40 overflow-hidden bg-[#edece7]">
-                <Image
-                  src={card.gallery[0]}
-                  alt={card.title}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
-                />
+              {/* Единый кроп 4:3 у всех карточек: без него превью «прыгают» по высоте. */}
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#edece7]">
+                {catalogSlides[cardIndex][0].kind === "managed" ? (
+                  <CatalogPhoto
+                    photo={catalogSlides[cardIndex][0].photo}
+                    alt={catalogSlides[cardIndex][0].alt}
+                    variant="card"
+                    sizes="(min-width: 768px) calc((1540px - 7rem) / 3), 100vw"
+                    priority={cardIndex === 0}
+                    className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <Image
+                    src={catalogSlides[cardIndex][0].src}
+                    alt={catalogSlides[cardIndex][0].alt}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="min-h-14 font-serif text-2xl leading-7">{card.title}</h3>
@@ -589,7 +685,12 @@ export default function HlopokLandingV2() {
           aria-modal="true"
           aria-label={catalogCards[lightbox.card].title}
         >
-          <div className="relative flex w-full max-w-[1040px] flex-col" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="relative flex w-full max-w-[1040px] flex-col"
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="mb-4 flex items-center justify-between text-[#fbfaf6]">
               <p className="font-serif text-xl md:text-2xl">{catalogCards[lightbox.card].title}</p>
               <button
@@ -603,15 +704,30 @@ export default function HlopokLandingV2() {
             </div>
 
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[6px] bg-black/30 md:aspect-[16/10]">
-              <Image
-                key={catalogCards[lightbox.card].gallery[lightbox.photo]}
-                src={catalogCards[lightbox.card].gallery[lightbox.photo]}
-                alt={`${catalogCards[lightbox.card].title} — ракурс ${lightbox.photo + 1}`}
-                fill
-                sizes="(min-width: 768px) 1040px, 100vw"
-                className="object-contain"
-              />
-              {catalogCards[lightbox.card].gallery.length > 1 ? (
+              {(() => {
+                const slide = catalogSlides[lightbox.card][lightbox.photo];
+                return slide.kind === "managed" ? (
+                  <CatalogPhoto
+                    key={slide.key}
+                    photo={slide.photo}
+                    alt={slide.alt}
+                    variant="full"
+                    sizes="(min-width: 768px) 1040px, 100vw"
+                    priority
+                    className="object-contain"
+                  />
+                ) : (
+                  <Image
+                    key={slide.key}
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    sizes="(min-width: 768px) 1040px, 100vw"
+                    className="object-contain"
+                  />
+                );
+              })()}
+              {catalogSlides[lightbox.card].length > 1 ? (
                 <>
                   <button
                     type="button"
@@ -635,23 +751,34 @@ export default function HlopokLandingV2() {
 
             <div className="mt-4 flex items-center justify-between text-[#fbfaf6]/70">
               <div className="flex gap-2">
-                {catalogCards[lightbox.card].gallery.map((src, index) => (
+                {catalogSlides[lightbox.card].map((slide, index) => (
                   <button
                     type="button"
-                    key={src}
+                    key={slide.key}
                     onClick={() => setLightbox({ card: lightbox.card, photo: index })}
                     aria-label={`Фото ${index + 1}`}
+                    aria-current={index === lightbox.photo}
                     className={`relative h-14 w-20 overflow-hidden rounded-[3px] border transition ${
                       index === lightbox.photo ? "border-[#e59b6a]" : "border-white/20 opacity-60 hover:opacity-100"
                     }`}
                   >
-                    <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+                    {slide.kind === "managed" ? (
+                      <CatalogPhoto photo={slide.photo} alt="" variant="card" sizes="80px" className="object-cover" />
+                    ) : (
+                      <Image src={slide.src} alt="" fill sizes="80px" className="object-cover" />
+                    )}
                   </button>
                 ))}
               </div>
-              <span className="text-[12px]">
-                {lightbox.photo + 1} / {catalogCards[lightbox.card].gallery.length}
-              </span>
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-[12px]">
+                  {lightbox.photo + 1} / {catalogSlides[lightbox.card].length}
+                </span>
+                {/* Жесты не видны в интерфейсе — подсказываем только на тач-экранах. */}
+                <span className="text-[10px] uppercase tracking-[0.06em] text-[#fbfaf6]/45 md:hidden">
+                  Свайп — листать, вниз — закрыть
+                </span>
+              </div>
             </div>
           </div>
         </motion.div>
