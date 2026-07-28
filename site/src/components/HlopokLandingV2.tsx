@@ -93,6 +93,7 @@ const catalogSlides = catalogCards.map(slidesFor);
 // Hero живёт в том же пайплайне (photos-src/hero/), но вне каталога:
 // это LCP-кадр, ему нужны AVIF и srcset, а не одиночный JPEG.
 const heroPhoto = photosFor("hero")[0];
+const productionPhoto = photosFor("production")[0];
 
 // Product-разметка: поисковики берут отсюда фото и характеристики товара.
 const catalogJsonLd = {
@@ -472,8 +473,18 @@ export default function HlopokLandingV2() {
         <div>
           <SectionLabel value="03" />
           <h2 className="font-serif text-5xl tracking-[-0.03em]">Производство</h2>
-          <figure className="relative mt-8 aspect-[342/229] overflow-hidden">
-            <Image src="/media/v2/production-roll.jpg" alt="Рулон хлопковой ткани на производстве" fill className="object-cover" />
+          {/* Пропорция идёт от самого кадра: раньше здесь было зашито 342/229 — размер старого JPEG. */}
+          <figure className="relative mt-8 aspect-[4/3] overflow-hidden">
+            {productionPhoto ? (
+              <CatalogPhoto
+                photo={productionPhoto}
+                variant="full"
+                sizes="(min-width: 768px) 46vw, 100vw"
+                className="object-cover"
+              />
+            ) : (
+              <Image src="/media/v2/production-roll.jpg" alt="Рулон хлопковой ткани на производстве" fill className="object-cover" />
+            )}
           </figure>
         </div>
         <div className="pt-8">
