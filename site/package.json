@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "photos": "node scripts/build-photos.mjs",
+    "photos:check": "node scripts/check-photos.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
