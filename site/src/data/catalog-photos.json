@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T11:57:33.741Z",
+  "generatedAt": "2026-07-28T17:56:49.825Z",
   "widths": [
     480,
     768,
@@ -443,6 +443,138 @@
           ]
         },
         "source": "03-edge.png"
+      }
+    ],
+    "hero": [
+      {
+        "id": "hero/01-corner",
+        "alt": "Угол холста из 100% хлопка на деревянном подрамнике: ровный загиб ткани, скобы крепления и торец рамы",
+        "width": 1122,
+        "height": 1402,
+        "aspect": 0.8003,
+        "blur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBACdASoUABkAPt1WpUyopKOiN/VYARAbiWUAtQjmQepzfu6h8wCxkAAA/uz5g916weCeE6heCHhEQYpeBjig6Eycn6ZFeFhtPDA60aYJNB5N06ZqCPjFOPASBc7BX41vKXyzB1U9gjymHabSSxN4BWgBm+PJAAA=",
+        "full": {
+          "avif": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.avif",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.avif",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.avif",
+              "width": 1122,
+              "height": 1402
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.webp",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.webp",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.webp",
+              "width": 1122,
+              "height": 1402
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/hero/01-corner-480.jpg",
+              "width": 480,
+              "height": 600
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-768.jpg",
+              "width": 768,
+              "height": 960
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-1122.jpg",
+              "width": 1122,
+              "height": 1402
+            }
+          ]
+        },
+        "card": {
+          "avif": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.avif",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.avif",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.avif",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.avif",
+              "width": 768,
+              "height": 576
+            }
+          ],
+          "webp": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.webp",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.webp",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          ],
+          "jpg": [
+            {
+              "src": "/media/catalog/hero/01-corner-card-160.jpg",
+              "width": 160,
+              "height": 120
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-320.jpg",
+              "width": 320,
+              "height": 240
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-480.jpg",
+              "width": 480,
+              "height": 360
+            },
+            {
+              "src": "/media/catalog/hero/01-corner-card-768.jpg",
+              "width": 768,
+              "height": 576
+            }
+          ]
+        },
+        "source": "01-corner.png"
       }
     ],
     "stretcher-coarse": [

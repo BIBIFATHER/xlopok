@@ -90,6 +90,10 @@ function slidesFor(card: (typeof catalogCards)[number]): GallerySlide[] {
 
 const catalogSlides = catalogCards.map(slidesFor);
 
+// Hero живёт в том же пайплайне (photos-src/hero/), но вне каталога:
+// это LCP-кадр, ему нужны AVIF и srcset, а не одиночный JPEG.
+const heroPhoto = photosFor("hero")[0];
+
 // Product-разметка: поисковики берут отсюда фото и характеристики товара.
 const catalogJsonLd = {
   "@context": "https://schema.org",
@@ -440,14 +444,24 @@ export default function HlopokLandingV2() {
             </a>
           </div>
           <figure className="relative min-h-[320px] overflow-hidden md:min-h-[660px]">
-            <Image
-              src="/media/v2/hero-canvas.jpg"
-              alt="Крупный план хлопкового холста на деревянном подрамнике"
-              fill
-              priority
-              sizes="(min-width: 768px) 66vw, 100vw"
-              className="object-cover"
-            />
+            {heroPhoto ? (
+              <CatalogPhoto
+                photo={heroPhoto}
+                variant="full"
+                sizes="(min-width: 768px) 66vw, 100vw"
+                priority
+                className="object-cover"
+              />
+            ) : (
+              <Image
+                src="/media/v2/hero-canvas.jpg"
+                alt="Крупный план хлопкового холста на деревянном подрамнике"
+                fill
+                priority
+                sizes="(min-width: 768px) 66vw, 100vw"
+                className="object-cover"
+              />
+            )}
             <span className="absolute bottom-6 right-[-3px] hidden h-24 border-r border-[#e59b6a] text-[#e59b6a] md:block" />
             <span className="absolute bottom-8 right-5 text-[16px] text-[#e59b6a]">02</span>
           </figure>
