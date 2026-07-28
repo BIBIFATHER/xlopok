@@ -444,14 +444,16 @@ export default function HlopokLandingV2() {
               Смотреть продукцию <span className="h-px w-16 bg-[#e59b6a]" />
             </a>
           </div>
-          <figure className="relative min-h-[320px] overflow-hidden md:min-h-[660px]">
+          {/* 460px на мобиле: вертикальный кадр при 320px ужимался в узкую полосу с полями. */}
+          <figure className="relative min-h-[460px] overflow-hidden md:min-h-[660px]">
             {heroPhoto ? (
+              /* contain: кадр вертикальный, cover срезал бы у него верх и низ. */
               <CatalogPhoto
                 photo={heroPhoto}
                 variant="full"
                 sizes="(min-width: 768px) 66vw, 100vw"
                 priority
-                className="object-cover"
+                className="object-contain object-center md:object-right"
               />
             ) : (
               <Image
