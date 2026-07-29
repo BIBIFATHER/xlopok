@@ -1,10 +1,15 @@
-// Приём заявок с формы. Пишем в Bitrix24 CRM (crm.lead.add) через входящий
-// вебхук. Секреты только в серверном env (process.env), НИКОГДА не в
-// NEXT_PUBLIC_ и не в ответе/логах.
+// Приём заявок с формы. Два приёмника:
+//   1. Bitrix24 CRM (crm.lead.add) через входящий вебхук — основной;
+//   2. письмо на ящик, подключённый к CRM — резерв на случай, если вебхук
+//      недоступен. Настраивается отдельно, без переменных просто выключен.
+// Секреты только в серверном env (process.env), НИКОГДА не в NEXT_PUBLIC_ и
+// не в ответе/логах.
 //
 // Молчаливых отказов быть не должно: неудача приёмника пишется в stderr, а
 // потерянная заявка — целиком, чтобы контакт клиента можно было достать из
 // логов хостинга. GET /api/lead показывает, что сконфигурировано.
+
+import { mailConfigured, toEmail } from "./mail";
 
 type LeadPayload = {
   name?: string;
@@ -121,13 +126,20 @@ export async function POST(request: Request) {
     comment: clip(body.comment, 4000),
   };
 
-  const bitrix = await toBitrix(lead);
+  // Приёмники независимы: письмо уходит, даже если вебхук лёг, и наоборот.
+  const [bitrixSettled, mailSettled] = await Promise.allSettled([toBitrix(lead), toEmail(lead)]);
+  const bitrix = bitrixSettled.status === "fulfilled" ? bitrixSettled.value : "failed";
+  const mail = mailSettled.status === "fulfilled" ? mailSettled.value : "failed";
 
-  if (bitrix !== "ok") {
+  if (bitrix !== "ok" && mail !== "ok") {
     // Заявка потеряна. Пишем её в лог целиком — иначе контакт клиента исчезнет
     // бесследно, а форма на клиенте лишь предложит продублировать в Telegram.
-    console.error("[lead] ЗАЯВКА НЕ СОХРАНЕНА:", JSON.stringify({ ...lead, bitrix }));
+    console.error("[lead] ЗАЯВКА НЕ СОХРАНЕНА:", JSON.stringify({ ...lead, bitrix, mail }));
     return Response.json({ error: "upstream error" }, { status: 502 });
+  }
+
+  if (bitrix !== "ok") {
+    console.error(`[lead] в CRM напрямую не попало (${bitrix}) — заявка ушла письмом`);
   }
 
   return Response.json({ ok: true });
@@ -140,8 +152,13 @@ export async function POST(request: Request) {
  */
 export async function GET() {
   const bitrixReady = bitrixConfigured();
+  const mailReady = mailConfigured();
   return Response.json(
-    { bitrix: bitrixReady ? "configured" : "missing", ready: bitrixReady },
-    { status: bitrixReady ? 200 : 503 },
+    {
+      bitrix: bitrixReady ? "configured" : "missing",
+      mail: mailReady ? "configured" : "missing",
+      ready: bitrixReady || mailReady,
+    },
+    { status: bitrixReady || mailReady ? 200 : 503 },
   );
 }
