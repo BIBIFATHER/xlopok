@@ -1,13 +1,10 @@
-// Приём заявок с формы. Пишем в два приёмника:
-//   1. Bitrix24 CRM (crm.lead.add) через входящий вебхук — основной;
-//   2. Supabase (public.leads) — резервный, может быть не настроен.
-// Секреты только в серверном env (process.env), НИКОГДА не в NEXT_PUBLIC_ и
-// не в ответе/логах. Запрос считается успешным, если сработал хотя бы один
-// приёмник — падение одного не роняет заявку.
+// Приём заявок с формы. Пишем в Bitrix24 CRM (crm.lead.add) через входящий
+// вебхук. Секреты только в серверном env (process.env), НИКОГДА не в
+// NEXT_PUBLIC_ и не в ответе/логах.
 //
-// Молчаливых отказов быть не должно: каждая неудача приёмника пишется в
-// stderr, а потерянная заявка — целиком, чтобы контакт клиента можно было
-// достать из логов. GET /api/lead показывает, что вообще сконфигурировано.
+// Молчаливых отказов быть не должно: неудача приёмника пишется в stderr, а
+// потерянная заявка — целиком, чтобы контакт клиента можно было достать из
+// логов хостинга. GET /api/lead показывает, что сконфигурировано.
 
 type LeadPayload = {
   name?: string;
@@ -35,39 +32,6 @@ type SinkResult = "ok" | "not-configured" | "failed";
 
 /** Переменная задана и непустая: пробелы из панели хостинга не считаются значением. */
 const env = (name: string) => process.env[name]?.trim() || null;
-
-async function toSupabase(lead: CleanLead): Promise<SinkResult> {
-  const url = env("SUPABASE_URL");
-  const key = env("SUPABASE_PUBLISHABLE_KEY");
-  if (!url || !key) return "not-configured";
-
-  try {
-    const res = await fetch(`${url}/rest/v1/leads`, {
-      method: "POST",
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify({
-        name: lead.name,
-        contact: lead.contact,
-        need: lead.need,
-        company: lead.company,
-        comment: lead.comment,
-        source: "site-v2",
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) console.error(`[lead] supabase ответил ${res.status}`);
-    return res.ok ? "ok" : "failed";
-  } catch (error) {
-    // Проект может быть удалён или приостановлен — домен тогда не резолвится.
-    console.error("[lead] supabase недоступен:", (error as Error).name);
-    return "failed";
-  }
-}
 
 /** Вебхук задан и похож на правильный URL. Значение наружу не отдаём. */
 function bitrixConfigured(): boolean {
@@ -157,23 +121,13 @@ export async function POST(request: Request) {
     comment: clip(body.comment, 4000),
   };
 
-  // Оба приёмника независимо и без взаимной блокировки.
-  const [supabase, bitrix] = await Promise.allSettled([toSupabase(lead), toBitrix(lead)]);
-  const supabaseResult = supabase.status === "fulfilled" ? supabase.value : "failed";
-  const bitrixResult = bitrix.status === "fulfilled" ? bitrix.value : "failed";
+  const bitrix = await toBitrix(lead);
 
-  if (supabaseResult !== "ok" && bitrixResult !== "ok") {
+  if (bitrix !== "ok") {
     // Заявка потеряна. Пишем её в лог целиком — иначе контакт клиента исчезнет
     // бесследно, а форма на клиенте лишь предложит продублировать в Telegram.
-    console.error(
-      "[lead] ЗАЯВКА НЕ СОХРАНЕНА:",
-      JSON.stringify({ ...lead, supabase: supabaseResult, bitrix: bitrixResult }),
-    );
+    console.error("[lead] ЗАЯВКА НЕ СОХРАНЕНА:", JSON.stringify({ ...lead, bitrix }));
     return Response.json({ error: "upstream error" }, { status: 502 });
-  }
-
-  if (bitrixResult !== "ok") {
-    console.error(`[lead] в CRM не попало (${bitrixResult}), заявка только в Supabase`);
   }
 
   return Response.json({ ok: true });
@@ -185,16 +139,9 @@ export async function POST(request: Request) {
  * на проде было видно сразу, а не по отсутствию лидов через неделю.
  */
 export async function GET() {
-  const supabaseReady = Boolean(env("SUPABASE_URL") && env("SUPABASE_PUBLISHABLE_KEY"));
   const bitrixReady = bitrixConfigured();
-  // ready считаем по CRM: настроенный Supabase ещё не значит живой (проект может
-  // быть удалён), и «ready: true» при мёртвом резерве маскировал бы потерю заявок.
   return Response.json(
-    {
-      bitrix: bitrixReady ? "configured" : "missing",
-      supabase: supabaseReady ? "configured" : "missing",
-      ready: bitrixReady,
-    },
+    { bitrix: bitrixReady ? "configured" : "missing", ready: bitrixReady },
     { status: bitrixReady ? 200 : 503 },
   );
 }
