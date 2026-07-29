@@ -187,12 +187,14 @@ export async function POST(request: Request) {
 export async function GET() {
   const supabaseReady = Boolean(env("SUPABASE_URL") && env("SUPABASE_PUBLISHABLE_KEY"));
   const bitrixReady = bitrixConfigured();
+  // ready считаем по CRM: настроенный Supabase ещё не значит живой (проект может
+  // быть удалён), и «ready: true» при мёртвом резерве маскировал бы потерю заявок.
   return Response.json(
     {
       bitrix: bitrixReady ? "configured" : "missing",
       supabase: supabaseReady ? "configured" : "missing",
-      ready: bitrixReady || supabaseReady,
+      ready: bitrixReady,
     },
-    { status: bitrixReady || supabaseReady ? 200 : 503 },
+    { status: bitrixReady ? 200 : 503 },
   );
 }

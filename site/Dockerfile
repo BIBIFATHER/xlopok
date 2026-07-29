@@ -21,12 +21,11 @@ ARG SUPABASE_URL
 ARG SUPABASE_PUBLISHABLE_KEY
 ENV SUPABASE_URL=$SUPABASE_URL
 ENV SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY
-# Вебхук CRM. Без него заявки с формы никуда не сохраняются.
-# ВНИМАНИЕ: это секрет, и через ARG он остаётся в слоях образа. Предпочтительно
-# задавать его переменной окружения контейнера — тогда ARG остаётся пустым,
-# а рантайм-значение перекрывает ENV. Образ держать приватным.
-ARG BITRIX24_WEBHOOK_URL
-ENV BITRIX24_WEBHOOK_URL=$BITRIX24_WEBHOOK_URL
+# BITRIX24_WEBHOOK_URL сюда НЕ прокидываем через ARG: вебхук даёт полный доступ
+# к CRM, а ARG/ENV сохранили бы его в слоях образа (виден в `docker history`).
+# Задаётся переменной окружения контейнера в панели хостинга — читается
+# в рантайме, в образ не попадает.
+# Проверка после деплоя: GET /api/lead → {"bitrix":"configured"}
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
