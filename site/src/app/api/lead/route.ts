@@ -1,7 +1,8 @@
 // Приём заявок с формы. Два приёмника:
 //   1. Bitrix24 CRM (crm.lead.add) через входящий вебхук — основной;
-//   2. письмо на ящик, подключённый к CRM — резерв на случай, если вебхук
-//      недоступен. Настраивается отдельно, без переменных просто выключен.
+//   2. письмо на ящик, подключённый к CRM — резерв, отправляется ТОЛЬКО если
+//      вебхук не сработал. Ящик читает та же CRM, поэтому параллельная
+//      отправка создавала бы по два лида на заявку.
 // Секреты только в серверном env (process.env), НИКОГДА не в NEXT_PUBLIC_ и
 // не в ответе/логах.
 //
@@ -126,10 +127,10 @@ export async function POST(request: Request) {
     comment: clip(body.comment, 4000),
   };
 
-  // Приёмники независимы: письмо уходит, даже если вебхук лёг, и наоборот.
-  const [bitrixSettled, mailSettled] = await Promise.allSettled([toBitrix(lead), toEmail(lead)]);
-  const bitrix = bitrixSettled.status === "fulfilled" ? bitrixSettled.value : "failed";
-  const mail = mailSettled.status === "fulfilled" ? mailSettled.value : "failed";
+  // Почта — именно резерв, а не второй канал: ящик подключён к той же CRM,
+  // и параллельная отправка давала бы по два лида на каждую заявку.
+  const bitrix = await toBitrix(lead);
+  const mail = bitrix === "ok" ? "skipped" : await toEmail(lead);
 
   if (bitrix !== "ok" && mail !== "ok") {
     // Заявка потеряна. Пишем её в лог целиком — иначе контакт клиента исчезнет
@@ -139,7 +140,7 @@ export async function POST(request: Request) {
   }
 
   if (bitrix !== "ok") {
-    console.error(`[lead] в CRM напрямую не попало (${bitrix}) — заявка ушла письмом`);
+    console.error(`[lead] вебхук не сработал (${bitrix}) — заявка ушла письмом на резервный ящик`);
   }
 
   return Response.json({ ok: true });
