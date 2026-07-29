@@ -15,12 +15,8 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-# Env могут прийти как build-arg (Timeweb) — фиксируем их в рантайм-окружение образа.
-# Publishable-ключ публичный по природе, безопасно.
-ARG SUPABASE_URL
-ARG SUPABASE_PUBLISHABLE_KEY
-ENV SUPABASE_URL=$SUPABASE_URL
-ENV SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY
+# Переменные окружения задаются в панели хостинга и приходят в контейнер
+# в рантайме — прокидывать их через ARG не нужно.
 # BITRIX24_WEBHOOK_URL сюда НЕ прокидываем через ARG: вебхук даёт полный доступ
 # к CRM, а ARG/ENV сохранили бы его в слоях образа (виден в `docker history`).
 # Задаётся переменной окружения контейнера в панели хостинга — читается
